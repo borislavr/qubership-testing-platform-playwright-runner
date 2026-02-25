@@ -147,7 +147,6 @@ jobs:
             echo "chart_name: '$chart_name'"
             echo "chart_version: '$chart_version'"
           done
-          
 
   docker-build:
     name: ${{ matrix.component.name }}
@@ -167,6 +166,12 @@ jobs:
           IMAGE_VER: "${{ fromJson(needs.chart-release.outputs.images-versions)[matrix.component.name] || inputs.release }}"
         run: |
           echo "IMAGE_VERSION=${IMAGE_VER}" >> $GITHUB_ENV
+
+      - name: Checkout
+        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
+        with:
+          submodules: recursive
+          ref: release-${{ inputs.release }}
 
       - name: Docker build
         uses: netcracker/qubership-workflow-hub/actions/docker-action@8d542a426ce561c7dce745f6b9cee068d1d7e101 # v2.0.10
