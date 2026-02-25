@@ -8,5 +8,5 @@ charts:
       - ghcr.io/netcracker/qubership-testing-platform-playwright-runner:${release}
   - name: deployment-lib
     chart_file: deployments/charts/deployment-lib/Chart.yaml
-    values_file: 'deployments/charts/deployment-lib/Chart.yaml'
+    values_file: deployments/charts/deployment-lib/Chart.yaml
     image: []
